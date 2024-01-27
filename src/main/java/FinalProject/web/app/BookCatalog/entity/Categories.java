@@ -18,6 +18,6 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long categoriesId;
     private String categoriesName;
-    @ManyToMany
+    @ManyToMany(mappedBy = "categories")
     private List<Book> books;
 }

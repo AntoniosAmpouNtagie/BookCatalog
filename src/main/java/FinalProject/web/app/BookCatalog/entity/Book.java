@@ -18,14 +18,17 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long bookId;
     private String title;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "books")
     private List<Author> authors;
     private int year;
     private double price;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(name = "book_category",joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private List<Categories> categories;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publishers")
+    @JoinColumn(name = "publisher_id")
     private Publishers publishers;
     private String summary;
 }

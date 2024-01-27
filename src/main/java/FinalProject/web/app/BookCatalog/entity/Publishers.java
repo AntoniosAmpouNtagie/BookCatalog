@@ -19,6 +19,6 @@ public class Publishers {
     private long publishersId;
     private String name;
     private String address;
-    @OneToMany
+    @OneToMany(mappedBy = "publishers")
     private List<Book> books;
 }
