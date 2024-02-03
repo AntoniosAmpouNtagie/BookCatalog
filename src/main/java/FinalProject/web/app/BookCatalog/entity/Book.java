@@ -1,5 +1,7 @@
 package FinalProject.web.app.BookCatalog.entity;
 
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
+@Schema(description = "Details about the book")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +19,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long bookId;
+    @Schema(description = "Title of the book")
     private String title;
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "books")
     private List<Author> authors;
+    @Schema(description = "Year of publication")
     private int year;
+    @Schema(description = "Price of the book")
     private double price;
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "book_category",joinColumns = @JoinColumn(name = "book_id"),
@@ -30,5 +35,6 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id")
     private Publishers publishers;
+    @Schema(description = "Summary of the book")
     private String summary;
 }
