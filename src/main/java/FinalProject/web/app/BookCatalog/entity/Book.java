@@ -20,9 +20,10 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long bookId;
     @Schema(description = "Title of the book")
+    @Column(name = "book_title")
     private String title;
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "books")
-    private List<Author> authors;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Author author;
     @Schema(description = "Year of publication")
     private int year;
     @Schema(description = "Price of the book")
